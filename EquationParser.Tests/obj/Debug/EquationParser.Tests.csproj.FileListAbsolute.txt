@@ -1,0 +1,7 @@
+C:\Code\EquationParser\EquationParser.Tests\bin\Debug\EquationParser.Tests.dll
+C:\Code\EquationParser\EquationParser.Tests\bin\Debug\EquationParser.Tests.pdb
+C:\Code\EquationParser\EquationParser.Tests\bin\Debug\EquationParser.dll
+C:\Code\EquationParser\EquationParser.Tests\bin\Debug\EquationParser.pdb
+C:\Code\EquationParser\EquationParser.Tests\obj\Debug\EquationParser.Tests.csprojResolveAssemblyReference.cache
+C:\Code\EquationParser\EquationParser.Tests\obj\Debug\EquationParser.Tests.dll
+C:\Code\EquationParser\EquationParser.Tests\obj\Debug\EquationParser.Tests.pdb

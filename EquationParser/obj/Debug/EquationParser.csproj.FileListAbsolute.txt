@@ -1,0 +1,4 @@
+C:\Code\EquationParser\EquationParser\bin\Debug\EquationParser.dll
+C:\Code\EquationParser\EquationParser\bin\Debug\EquationParser.pdb
+C:\Code\EquationParser\EquationParser\obj\Debug\EquationParser.dll
+C:\Code\EquationParser\EquationParser\obj\Debug\EquationParser.pdb

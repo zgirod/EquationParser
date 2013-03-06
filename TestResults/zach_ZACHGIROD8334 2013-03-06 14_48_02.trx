@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="ce27b74f-aa66-4fdd-a638-9d05687b7b31" name="zach@ZACHGIROD8334 2013-03-06 14:48:02" runUser="ZACHGIROD8334\zach" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="8f81bd0b-7145-4612-b833-92a7395bbdda">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment userDeploymentRoot="C:\Code\EquationParser\TestResults" useDefaultDeploymentRoot="false" enabled="false" runDeploymentRoot="zach_ZACHGIROD8334 2013-03-06 14_48_02">
+      <DeploymentItem filename="C:\Code\EquationParser\EquationParser\bin\Debug\EquationParser.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2013-03-06T14:48:02.7626954-05:00" queuing="2013-03-06T14:48:03.0449219-05:00" start="2013-03-06T14:48:03.2011719-05:00" finish="2013-03-06T14:48:03.5449219-05:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="ParserTest" storage="c:\code\equationparser\equationparser.tests\bin\debug\equationparser.tests.dll" id="276b65ff-5570-d427-899e-bc7f1cf4ae72">
+      <Execution id="1caf6d1f-4f3a-475b-ad41-4b016709e5bc" />
+      <TestMethod codeBase="C:/Code/EquationParser/EquationParser.Tests/bin/Debug/EquationParser.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="EquationParser.Tests.ParserTests, EquationParser.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ParserTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="276b65ff-5570-d427-899e-bc7f1cf4ae72" executionId="1caf6d1f-4f3a-475b-ad41-4b016709e5bc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="1caf6d1f-4f3a-475b-ad41-4b016709e5bc" testId="276b65ff-5570-d427-899e-bc7f1cf4ae72" testName="ParserTest" computerName="ZACHGIROD8334" duration="00:00:00.0212140" startTime="2013-03-06T14:48:03.2480469-05:00" endTime="2013-03-06T14:48:03.4355469-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1caf6d1f-4f3a-475b-ad41-4b016709e5bc">
+    </UnitTestResult>
+  </Results>
+</TestRun>
