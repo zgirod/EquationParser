@@ -90,7 +90,7 @@ namespace EquationParser
                 var subEquationToInsert = string.Format("{0}{1}{2}", leftNumber.ToString(), op, rightNumber.ToString());
 
                 //update the equation
-                equation = equation.Replace(subEquationToInsert, result.ToString());
+                equation = ReplaceEquation(equation, subEquationToInsert, result.ToString());
 
                 //try and see if we have that operator again
                 index = equation.IndexOfAny(operators);
@@ -145,7 +145,7 @@ namespace EquationParser
                     subEquationToInsert = subEquationToInsert.Substring(1);
 
                 //update the equation
-                equation = equation.Replace(subEquationToInsert, result.ToString());
+                equation = ReplaceEquation(equation, subEquationToInsert, result.ToString());
 
                 //try and see if we have that operator again
                 index = equation.IndexOfAny(operators);
@@ -154,6 +154,59 @@ namespace EquationParser
 
             //return the parsed equation
             return equation;
+
+        }
+
+        private static string ReplaceEquation(string equation, string subEquation, string newResult)
+        {
+
+            var tempEquation = "";
+            var index = 0;
+
+            do
+            {
+
+                //get the index of the sub
+                index = equation.IndexOf(subEquation, index);
+
+                //if what matches is an actual match
+                if (index == 0 || (index + subEquation.Length == equation.Length && index != -1) ||
+                    ((index - 1 > 0 && !Char.IsNumber(equation[index - 1])) //this line makes sure the left side of the equation is not a number
+                    && (!Char.IsNumber(equation[index + subEquation.Length])))) //this line makes sure the right side of the equation is not a number 
+                {
+
+                    //if we have values to th eleft
+                    if (index > 0)
+                        tempEquation = equation.Substring(0, index);
+                    else
+                        tempEquation = "";
+
+                    //add in the new result
+                    tempEquation += newResult;
+
+                    //add int the rest of the equation
+                    tempEquation += equation.Substring(index + subEquation.Length);
+
+                    //set the new equation
+                    equation = tempEquation;
+
+                    //reset the start index
+                    index = 0;
+
+                }
+                else if ( index >= 0)
+                {
+
+                    index = index + subEquation.Length;
+
+                }
+
+            }
+            while (index >= 0);
+
+
+            return equation;
+            
 
         }
 
