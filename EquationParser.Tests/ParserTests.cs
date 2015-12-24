@@ -56,16 +56,32 @@ namespace EquationParser.Tests
 
             foreach (var invalidEquation in invalidEquations)
             {
+    
+                var result = Parser.ParseEquation(invalidEquation.Key);
+                if (result != Convert.ToDecimal(int.MinValue))
+                    Assert.Fail("The equation was invalid and should have returned int.minvalue");
 
-                try
-                {
-                    Parser.ParseEquation(invalidEquation.Key);
-                    Assert.Fail("Parser should have thrown an exception and didn't");
-                }
-                catch
-                {
-                }
+            }
 
+        }
+
+        [TestMethod]
+        public void MultipleParserTest()
+        {
+
+            Dictionary<string, bool> equations = new Dictionary<string, bool>() {
+                { "9=5+4", true},
+                { "(2+2)*3=8=3+4", false},
+                { "(2+2)*3=12=4+4+4", true},
+                { "-5=7-12=1*(-5)", true},
+                { "-5=7-12", true}
+            };
+
+            //make sure each valid equation worked
+            foreach (var equation in equations)
+            {
+                Assert.AreEqual(equation.Value, 
+                    Parser.ParseMultipleEquations(equation.Key).Success, equation.Key);
             }
 
         }

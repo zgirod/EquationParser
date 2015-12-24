@@ -5,6 +5,14 @@ using System.Text;
 
 namespace EquationParser
 {
+
+    public class MultipleParseResult
+    {
+        public bool Success { get; set; }
+        public List<string> Equations { get; set; }
+        public List<decimal> EquationResults { get; set; }
+    }
+
     public static class Parser
     {
 
@@ -12,20 +20,64 @@ namespace EquationParser
         private static char[] _secondOperators = new char[] { '+', '-' };
         private static List<string> _parenthesis = new List<string>() { "(", ")" };
 
-        public static decimal ParseEquation(string equation) 
+        public static decimal ParseEquation(string equation)
         {
 
-            //set the equation
-            equation = equation.Replace(" ", "").Trim(); ;
+            try
+            {
+                //set the equation
+                equation = equation.Replace(" ", "").Trim();
 
-            //parse out the equation
-            equation = Parser.ProcessParenthesis(equation);
-            equation = Parser.ProcessMultiDivideOperators(Parser._firstOperators, equation);
-            equation = Parser.ProcessAdditionDivideOperators(Parser._secondOperators, equation);
+                //parse out the equation
+                equation = Parser.ProcessParenthesis(equation);
+                equation = Parser.ProcessMultiDivideOperators(Parser._firstOperators, equation);
+                equation = Parser.ProcessAdditionDivideOperators(Parser._secondOperators, equation);
+
+                //return the result
+                return Convert.ToDecimal(equation);
+            }
+            catch
+            {
+
+                //if we have an error, just return int.MinValue
+                return Convert.ToDecimal(int.MinValue);
+
+            }
+
+        }
+
+        public static MultipleParseResult ParseMultipleEquations(string equations)
+        {
+
+            //if we don't have an equation, return false
+            if (string.IsNullOrWhiteSpace(equations))
+                return new MultipleParseResult() { Success = false };
+
+            //get each equation part
+            var equationParts = equations.Split(new char[] {'='}).ToList();
+
+            //if we have only 1 equation part, return false
+            if (equationParts.Count() == 1)
+                return new MultipleParseResult() { Success = false };
+
+            //for each equation part, put them together
+            var equationResults = new List<decimal>();
+            var returnEquations = new List<string>();
+            foreach (var equationPart in equationParts)
+            {
+                returnEquations.Add(equationPart);
+                equationResults.Add(Parser.ParseEquation(equationPart));
+            }
+                
 
             //return the result
-            return Convert.ToDecimal(equation);
-            
+            return new MultipleParseResult()
+            {
+                Success = equationResults.Distinct().Count() == 1,
+                Equations = returnEquations,
+                EquationResults = equationResults
+            };
+
         }
 
         private static string ProcessParenthesis(string equation)
@@ -80,8 +132,8 @@ namespace EquationParser
                 var op = equation[index].ToString();
 
                 //get my two number
-                var leftNumber = Parser.GetNumber(index, true, equation, false);
-                var rightNumber = Parser.GetNumber(index, false, equation, false);
+                var leftNumber = Parser.GetNumber(index, true, equation, true);
+                var rightNumber = Parser.GetNumber(index, false, equation, true);
 
                 //get the result of the operations
                 var result = Parser.ProcessOperator(leftNumber, rightNumber, op);
@@ -175,7 +227,7 @@ namespace EquationParser
                     && (!Char.IsNumber(equation[index + subEquation.Length])))) //this line makes sure the right side of the equation is not a number 
                 {
 
-                    //if we have values to th eleft
+                    //if we have values to the left
                     if (index > 0)
                         tempEquation = equation.Substring(0, index);
                     else
@@ -194,7 +246,7 @@ namespace EquationParser
                     index = 0;
 
                 }
-                else if ( index >= 0)
+                else if (index >= 0)
                 {
 
                     index = index + subEquation.Length;
@@ -204,9 +256,8 @@ namespace EquationParser
             }
             while (index >= 0);
 
-
+            //return the equation
             return equation;
-            
 
         }
 
@@ -228,13 +279,13 @@ namespace EquationParser
 
         private static decimal GetNumber(int index, bool left, string equation, bool careAboutNegative)
         {
-            
+
             //go back or forth one digit
             if (left)
                 index--;
             else
                 index++;
-            
+
             //setup our number
             var number = 0;
 
@@ -254,7 +305,7 @@ namespace EquationParser
 
                 while (int.TryParse(equation[i].ToString(), out number))
                 {
-                    
+
                     //go back or forth one digit
                     if (left)
                     {
@@ -269,7 +320,7 @@ namespace EquationParser
 
                     if (i >= equation.Length || i < 0)
                         return Convert.ToDecimal(value);
-                    
+
                 }
 
                 //we need to make sure we process negative numbers
